@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Guard Extension Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            width: 350px;
+            height: 500px;
+            margin: 0;
+            background-color: #0b1120;
+            color: #cbd5e1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .status-ring {
+            box-shadow: 0 0 20px 5px rgba(239, 68, 68, 0.4);
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 15px 2px rgba(239, 68, 68, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 25px 8px rgba(239, 68, 68, 0.7);
+            }
+
+            100% {
+                box-shadow: 0 0 15px 2px rgba(239, 68, 68, 0.4);
+            }
+        }
+
+        .scan-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.8), transparent);
+            position: absolute;
+            top: -10%;
+            animation: scan 3s linear infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+        .text-glow-red {
+            text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body class="relative overflow-hidden flex flex-col h-full border border-slate-700 shadow-2xl">
+    <div class="scan-line"></div>
+    <header class="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-900/80">
+        <div class="flex items-center space-x-2">
+            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+            </svg>
+            <span class="font-bold text-lg tracking-widest text-slate-100">AGENT GUARD</span>
+        </div>
+        <span
+            class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">v1.0</span>
+    </header>
+    <main class="flex-1 overflow-y-auto p-4 flex flex-col gap-6 relative z-0">
+        <section class="flex flex-col items-center justify-center mt-2">
+            <div
+                class="status-ring w-24 h-24 rounded-full border-4 border-red-500 flex items-center justify-center bg-red-950/40 mb-4 relative">
+                <svg class="w-12 h-12 text-red-500 z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold text-red-500 tracking-wide text-glow-red text-center uppercase">Compromised
+            </h2>
+            <p
+                class="text-[11px] text-red-400 font-mono mt-1 text-center bg-red-900/30 px-3 py-1 rounded-full border border-red-900">
+                Hidden Prompts Detected</p>
+        </section>
+        <section class="bg-slate-800/40 rounded-lg p-3 border border-slate-700/50 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 10px 10px;">
+            </div>
+            <h3 class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3 relative z-10">Scan
+                Results Breakdown</h3>
+            <ul class="space-y-2 text-xs font-mono relative z-10 w-full">
+                <li class="flex justify-between items-center text-red-300"><span class="flex items-center"><span
+                            class="mr-2 text-red-500">></span> 0px Fonts</span><span
+                        class="font-bold bg-red-500/20 px-2 py-0.5 rounded text-red-200">2</span></li>
+                <li class="flex justify-between items-center text-red-300"><span class="flex items-center"><span
+                            class="mr-2 text-red-500">></span> White-on-White Text</span><span
+                        class="font-bold bg-red-500/20 px-2 py-0.5 rounded text-red-200">1</span></li>
+                <li class="flex justify-between items-center text-orange-300"><span class="flex items-center"><span
+                            class="mr-2 text-orange-500">></span> Hidden HTML Comments</span><span
+                        class="font-bold bg-orange-500/20 px-2 py-0.5 rounded text-orange-200">1</span></li>
+            </ul>
+        </section>
+        <section>
+            <h3 class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Recently Scanned
+                Citations</h3>
+            <div class="space-y-2">
+                <div
+                    class="flex items-center space-x-3 bg-slate-800/30 p-2.5 rounded border border-slate-700/80 hover:bg-slate-700/50 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]"></div>
+                    <div class="truncate flex-1 font-mono text-[11px] text-slate-300">
+                        https://www.google.com/search?q=source1.com</div>
+                </div>
+                <div
+                    class="flex items-center space-x-3 bg-red-900/20 p-2.5 rounded border border-red-900/50 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-red-500/5 animate-pulse pointer-events-none"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_6px_#ef4444] relative z-10"></div>
+                    <div class="truncate flex-1 font-mono text-[11px] text-red-300 relative z-10">
+                        https://source2.org/hidden-vectors</div>
+                </div>
+                <div
+                    class="flex items-center space-x-3 bg-slate-800/30 p-2.5 rounded border border-slate-700/80 hover:bg-slate-700/50 transition-colors">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]"></div>
+                    <div class="truncate flex-1 font-mono text-[11px] text-slate-300">
+                        https://wikipedia.org/wiki/AI_alignment</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer
+        class="p-2 border-t border-slate-800 bg-slate-900 text-center text-[9px] text-slate-500 font-mono flex justify-center items-center">
+        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 shadow-[0_0_4px_#22c55e]"></div>
+        Shield is active & monitoring
+    </footer>
+    <script src="popup.js"></script>
+</body>
+
+</html>
