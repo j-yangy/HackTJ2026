@@ -2,9 +2,12 @@
     "manifest_version": 3,
     "name": "Agent Guard",
     "version": "1.0",
-    "description": "AI Security Auditor (Mock-up)",
+    "description": "AI Security Auditor (Prototype)",
     "action": {
         "default_popup": "popup.html"
+    },
+    "background": {
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
@@ -19,8 +22,12 @@
             ]
         }
     ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
     "permissions": [
         "activeTab",
-        "scripting"
+        "scripting",
+        "storage"
     ]
 }
