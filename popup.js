@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Dashboard loaded.");
 
     chrome.storage.local.get({
-        aegisStats: {
+        datascapeStats: {
             zeroPx: 0,
             hiddenComments: 0
         }
     }, (result) => {
-        const stats = result.aegisStats;
+        const stats = result.datascapeStats;
 
         document.getElementById("count-0px").innerText = stats.zeroPx;
         document.getElementById("count-comments").innerText = stats.hiddenComments;
