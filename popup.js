@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Dashboard loaded.");
 
     chrome.storage.local.get({
-        datascapeStats: {
+        agentguardStats: {
             zeroPx: 0,
             hiddenComments: 0
         }
     }, (result) => {
-        const stats = result.datascapeStats;
+        const stats = result.agentguardStats;
 
         document.getElementById("count-0px").innerText = stats.zeroPx;
         document.getElementById("count-comments").innerText = stats.hiddenComments;
